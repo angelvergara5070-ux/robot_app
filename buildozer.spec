@@ -11,6 +11,7 @@ fullscreen = 1
 android.api = 34
 android.minapi = 26
 android.archs = arm64-v8a
+android.accept_sdk_license = True
 android.permissions = BLUETOOTH, BLUETOOTH_ADMIN, BLUETOOTH_SCAN, BLUETOOTH_CONNECT, ACCESS_FINE_LOCATION
 p4a.branch = develop
 
