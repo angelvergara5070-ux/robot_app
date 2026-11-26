@@ -5,7 +5,7 @@ package.domain = org.robot
 source.dir = .
 source.include_exts = py
 version = 0.1
-requirements = python3==3.11.5,hostpython3==3.11.5,kivy==2.3.1,bleak,pyjnius,android
+requirements = python3==3.11.5,hostpython3==3.11.5,kivy==2.3.1,bleak,typing_extensions,pyjnius,android
 orientation = landscape
 fullscreen = 1
 android.api = 35
