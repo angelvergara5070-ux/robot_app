@@ -18,7 +18,6 @@ from kivy.uix.widget import Widget
 from kivy.utils import get_color_from_hex as hx, platform
 
 import protocol as P
-from ble_client import RobotBLE
 
 if platform != "android":
     Window.size = (900, 420)  # simula pantalla horizontal en el PC
@@ -342,10 +341,22 @@ class RobotApp(App):
     estado = StringProperty("desconectado")
 
     def build(self):
+        try:
+            return self._construir()
+        except Exception:
+            import traceback
+            return Label(text=traceback.format_exc(), font_size=sp(11),
+                         halign="left", valign="top")
+
+    def _construir(self):
         if platform == "android":
-            from android.permissions import Permission, request_permissions
-            request_permissions([Permission.BLUETOOTH_SCAN, Permission.BLUETOOTH_CONNECT,
-                                 Permission.ACCESS_FINE_LOCATION])
+            from android.permissions import request_permissions
+            request_permissions([
+                "android.permission.BLUETOOTH_SCAN",
+                "android.permission.BLUETOOTH_CONNECT",
+                "android.permission.ACCESS_FINE_LOCATION",
+            ])
+        from ble_client import RobotBLE
         self.ble = RobotBLE(on_state=lambda s: setattr(self, "estado", s))
         sm = ScreenManager(transition=FadeTransition(duration=0.2))
         sm.add_widget(Inicio(name="inicio"))
